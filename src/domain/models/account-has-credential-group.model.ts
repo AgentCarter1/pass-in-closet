@@ -4,7 +4,6 @@ export class AccountHasCredentialGroupModel {
   public readonly credentialGroupId: string | null;
   public readonly createdAt: Date | null;
   public readonly updatedAt: Date | null;
-  public readonly deletedAt: Date | null;
 
   constructor(props: Partial<AccountHasCredentialGroupModel> = {}) {
     this.id = props.id;
@@ -12,6 +11,5 @@ export class AccountHasCredentialGroupModel {
     this.credentialGroupId = props.credentialGroupId ?? null;
     this.createdAt = props.createdAt ?? null;
     this.updatedAt = props.updatedAt ?? null;
-    this.deletedAt = props.deletedAt ?? null;
   }
 }
