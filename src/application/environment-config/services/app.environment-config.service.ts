@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { IAppEnvironmentConfig } from 'src/domain/environment-config/app/app.environment-config.interface';
+import { IAppEnvironmentConfig } from 'src/domain/environment-config/app.environment-config.interface';
 
 @Injectable()
 export class AppEnvironmentConfigService implements IAppEnvironmentConfig {
