@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignUpRequestDto } from 'src/application/dto/command/request/sign-up.command.request.body.dto';
+import { SignUpRequestDto } from 'src/application/dto/command/request/sign-up.request.body.dto';
 import { SignUpResponseDto } from 'src/application/dto/command/response/sign-up.response.dto';
 import { CreateAccountCommandService } from 'src/application/services/account/command/create-account.command.service';
 import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/get-one-account-by-filter.service';

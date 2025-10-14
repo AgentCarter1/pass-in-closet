@@ -1,28 +1,45 @@
-// import { Injectable } from '@nestjs/common';
-// import { LogInCommandRequestBodyDto } from 'src/application/dto/command/request/log-in.command.request.body.dto';
-// import { LogInCommandResponseDto } from 'src/application/dto/command/response/log-in.command.response.dto';
-// import { DataSource } from 'typeorm';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { LogInRequestBodyDto } from 'src/application/dto/command/request/log-in.request.body.dto';
+import { LogInResponseDto } from 'src/application/dto/command/response/log-in.response.dto';
+import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/get-one-account-by-filter.service';
+import { BcryptHashingService } from 'src/application/services/bcrypt/bcrypt-hashing.service';
+import { TokenService } from 'src/application/services/token/token.service';
+import { AccountModel } from 'src/domain/models/account.model';
 
-// @Injectable()
-// export class DeleteAccountMobileCommandUseCase {
-//   public constructor(private readonly dataSource: DataSource) {}
+@Injectable()
+export class LoginCommandUseCase {
+  constructor(
+    private readonly getOneAccountByFilterBaseQueryService: GetOneAccountByFilterBaseQueryService,
+    private readonly bcryptHashingService: BcryptHashingService,
+    private readonly tokenService: TokenService,
+  ) {}
 
-//   public async execute(
-//     body: LogInCommandRequestBodyDto,
-//   ): Promise<LogInCommandResponseDto> {
-//     const queryRunner = this.dataSource.createQueryRunner();
-//     await queryRunner.connect();
-//     await queryRunner.startTransaction();
+  public async execute(body: LogInRequestBodyDto): Promise<LogInResponseDto> {
+    const { email, password } = body;
+    const account: AccountModel | null =
+      await this.getOneAccountByFilterBaseQueryService.execute({
+        email,
+      });
 
-//     try {
-//       await queryRunner.commitTransaction();
+    if (!account) throw new UnauthorizedException('Invalid credentials');
 
-//       return new LogInCommandResponseDto({ accessToken: '', refreshToken: '' });
-//     } catch (error) {
-//       await queryRunner.rollbackTransaction();
-//       throw error;
-//     } finally {
-//       await queryRunner.release();
-//     }
-//   }
-// }
+    const isCompare: boolean = await this.bcryptHashingService.compare(
+      password,
+      account.password!,
+    );
+
+    if (!isCompare) throw new UnauthorizedException('Invalid credentials');
+
+    const accessToken: string = this.tokenService.createAccessToken({
+      accountId: account.id,
+      email: account.email,
+    });
+
+    const refreshToken: string = this.tokenService.createAccessToken({
+      accountId: account.id,
+      email: account.email,
+    });
+
+    return new LogInResponseDto({ accessToken, refreshToken });
+  }
+}
