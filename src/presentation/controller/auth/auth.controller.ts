@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
-import { LogInRequestBodyDto } from 'src/application/dto/command/request/log-in.request.body.dto';
-import { SignUpRequestDto } from 'src/application/dto/command/request/sign-up.request.body.dto';
-import { LogInResponseDto } from 'src/application/dto/command/response/log-in.response.dto';
-import { SignUpResponseDto } from 'src/application/dto/command/response/sign-up.response.dto';
+import { LogInRequestBodyDto } from 'src/application/dto/auth/request/log-in.request.body.dto';
+import { SignUpRequestDto } from 'src/application/dto/auth/request/sign-up.request.body.dto';
+import { LogInResponseDto } from 'src/application/dto/auth/response/log-in.response.dto';
+import { SignUpResponseDto } from 'src/application/dto/auth/response/sign-up.response.dto';
 import { LoginCommandUseCase } from 'src/application/use-cases/auth/command/log-in.command.use-case';
 import { SignUpCommandUseCase } from 'src/application/use-cases/auth/command/sign-up.command.use-case';
 

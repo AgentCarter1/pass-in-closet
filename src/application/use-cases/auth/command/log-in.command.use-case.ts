@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { LogInRequestBodyDto } from 'src/application/dto/command/request/log-in.request.body.dto';
-import { LogInResponseDto } from 'src/application/dto/command/response/log-in.response.dto';
+import { LogInRequestBodyDto } from 'src/application/dto/auth/request/log-in.request.body.dto';
+import { LogInResponseDto } from 'src/application/dto/auth/response/log-in.response.dto';
 import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/get-one-account-by-filter.service';
 import { BcryptHashingService } from 'src/application/services/bcrypt/bcrypt-hashing.service';
 import { TokenService } from 'src/application/services/token/token.service';
