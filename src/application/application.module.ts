@@ -1,8 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
+import { EnvironmentConfigModule } from './environment-config/environment-config.module';
 
+@Global()
 @Module({
-  imports: [],
+  imports: [EnvironmentConfigModule],
   controllers: [],
-  providers: [],
+  providers: [EnvironmentConfigModule],
 })
 export class ApplicationModule {}
