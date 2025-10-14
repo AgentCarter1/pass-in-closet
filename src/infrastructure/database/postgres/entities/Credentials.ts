@@ -1,11 +1,17 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
 import { CredentialGroups } from "./CredentialGroups";
 
+@Index("index_id_credential_group_id", ["credentialGroupId", "id"], {
+  unique: true,
+})
 @Index("pk_credentials_id", ["id"], { unique: true })
 @Entity("credentials", { schema: "public" })
 export class Credentials {
   @Column("uuid", { primary: true, name: "id" })
   id: string;
+
+  @Column("uuid", { name: "credential_group_id", nullable: true })
+  credentialGroupId: string | null;
 
   @Column("character varying", { name: "name", nullable: true, length: 255 })
   name: string | null;
