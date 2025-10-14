@@ -11,7 +11,5 @@ import { PresentationModule } from './presentation/presentation.module';
     ApplicationModule,
     PresentationModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

@@ -4,7 +4,6 @@ import { EnvironmentConfigModule } from './environment-config/environment-config
 @Global()
 @Module({
   imports: [EnvironmentConfigModule],
-  controllers: [],
   providers: [EnvironmentConfigModule],
 })
 export class ApplicationModule {}
