@@ -9,4 +9,8 @@ export class AppEnvironmentConfigService implements IAppEnvironmentConfig {
   public getAppPort(): number | undefined {
     return this.configService.get<number>('APP_PORT');
   }
+
+  public getSaltRound(): number | undefined {
+    return this.configService.get<number>('SALT_ROUND');
+  }
 }

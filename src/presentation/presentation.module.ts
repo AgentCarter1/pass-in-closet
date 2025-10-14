@@ -1,6 +1,7 @@
 import { Global, Module } from '@nestjs/common';
+import { ControllerModule } from './controller/controller.module';
 @Global()
 @Module({
-  controllers: [],
+  imports: [ControllerModule],
 })
 export class PresentationModule {}
