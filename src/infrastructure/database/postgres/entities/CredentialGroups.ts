@@ -1,39 +1,43 @@
-import { Column, Entity, Index, OneToMany } from "typeorm";
-import { AccountHasCredentialGroups } from "./AccountHasCredentialGroups";
-import { Credentials } from "./Credentials";
+import { Column, Entity, Index, OneToMany } from 'typeorm';
+import { AccountHasCredentialGroups } from './AccountHasCredentialGroups';
+import { Credentials } from './Credentials';
 
-@Index("pk_credential_group_id", ["id"], { unique: true })
-@Entity("credential_groups", { schema: "public" })
+@Index('pk_credential_group_id', ['id'], { unique: true })
+@Entity('credential_groups', { schema: 'public' })
 export class CredentialGroups {
-  @Column("uuid", { primary: true, name: "id" })
+  @Column('uuid', { primary: true, name: 'id' })
   id: string;
 
-  @Column("character varying", { name: "name", nullable: true, length: 255 })
+  @Column('character varying', { name: 'name', nullable: true, length: 255 })
   name: string | null;
 
-  @Column("timestamp without time zone", {
-    name: "created_at",
+  @Column('timestamp without time zone', {
+    name: 'created_at',
     nullable: true,
-    default: () => "now()",
+    default: () => 'now()',
   })
   createdAt: Date | null;
 
-  @Column("timestamp without time zone", {
-    name: "updated_at",
+  @Column('timestamp without time zone', {
+    name: 'updated_at',
     nullable: true,
-    default: () => "now()",
+    default: () => 'now()',
   })
   updatedAt: Date | null;
 
-  @Column("timestamp without time zone", { name: "deleted_at", nullable: true })
+  @Column('timestamp without time zone', { name: 'deleted_at', nullable: true })
   deletedAt: Date | null;
 
   @OneToMany(
     () => AccountHasCredentialGroups,
-    (accountHasCredentialGroups) => accountHasCredentialGroups.credentialGroup
+    (accountHasCredentialGroups) => accountHasCredentialGroups.credentialGroup,
   )
   accountHasCredentialGroups: AccountHasCredentialGroups[];
 
-  @OneToMany(() => Credentials, (credentials) => credentials.credentialGroup)
+  @OneToMany(
+    () => require('./Credentials').Credentials,
+    (credential: any) => credential.credentialGroup,
+    { onDelete: 'CASCADE', onUpdate: 'CASCADE' },
+  )
   credentials: Credentials[];
 }
