@@ -1,11 +1,17 @@
-import { Column, Entity, Index, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { AccountHasCredentialGroups } from './AccountHasCredentialGroups';
 import { Credentials } from './Credentials';
 
 @Index('pk_credential_group_id', ['id'], { unique: true })
 @Entity('credential_groups', { schema: 'public' })
 export class CredentialGroups {
-  @Column('uuid', { primary: true, name: 'id' })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column('character varying', { name: 'name', nullable: true, length: 255 })

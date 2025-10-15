@@ -6,7 +6,7 @@ import {
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { AuthTokenTypeEnum } from 'src/domain/enums/auth/auth-token-types.enum';
-import { GetOneAccountByFilterBaseQueryService } from '../services/account/query/get-one-account-by-filter.service';
+import { GetOneAccountByFilterBaseQueryService } from '../services/account/query/account/get-one-account-by-filter.service';
 import { EnvironmentConfigService } from '../environment-config/environment-config.service';
 import { AccessTokenPayloadType } from 'src/domain/types/auth/access-token-payload.type';
 import { TokenUtils } from '../utils/token/token.utils';
