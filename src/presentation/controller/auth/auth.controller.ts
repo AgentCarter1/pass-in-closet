@@ -6,6 +6,7 @@ import { LogInResponseDto } from 'src/application/dto/auth/response/log-in.respo
 import { SignUpResponseDto } from 'src/application/dto/auth/response/sign-up.response.dto';
 import { LoginCommandUseCase } from 'src/application/use-cases/auth/command/log-in.command.use-case';
 import { SignUpCommandUseCase } from 'src/application/use-cases/auth/command/sign-up.command.use-case';
+import { SkipAccessToken } from 'src/presentation/decorators/skip-access-token.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -18,6 +19,7 @@ export class AuthController {
     description: 'Successful',
     type: SignUpResponseDto,
   })
+  @SkipAccessToken()
   @Post('sign-up')
   public async signUp(
     @Body() Body: SignUpRequestDto,
@@ -29,6 +31,7 @@ export class AuthController {
     description: 'Successful',
     type: LogInResponseDto,
   })
+  @SkipAccessToken()
   @Post('log-in')
   public async logIn(
     @Body() Body: LogInRequestBodyDto,

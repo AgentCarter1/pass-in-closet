@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { LogInRequestBodyDto } from 'src/application/dto/auth/request/log-in.request.body.dto';
 import { LogInResponseDto } from 'src/application/dto/auth/response/log-in.response.dto';
+import { UpdateAccountCommandService } from 'src/application/services/account/command/update-accont.command.service';
 import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/get-one-account-by-filter.service';
 import { BcryptHashingService } from 'src/application/services/bcrypt/bcrypt-hashing.service';
 import { TokenService } from 'src/application/services/token/token.service';
@@ -10,6 +11,7 @@ import { AccountModel } from 'src/domain/models/account.model';
 export class LoginCommandUseCase {
   constructor(
     private readonly getOneAccountByFilterBaseQueryService: GetOneAccountByFilterBaseQueryService,
+    private readonly updateAccountCommandService: UpdateAccountCommandService,
     private readonly bcryptHashingService: BcryptHashingService,
     private readonly tokenService: TokenService,
   ) {}
@@ -39,6 +41,11 @@ export class LoginCommandUseCase {
       accountId: account.id,
       email: account.email,
     });
+
+    await this.updateAccountCommandService.execute(
+      { id: account.id },
+      { ...account, accessToken, refreshToken },
+    );
 
     return new LogInResponseDto({ accessToken, refreshToken });
   }

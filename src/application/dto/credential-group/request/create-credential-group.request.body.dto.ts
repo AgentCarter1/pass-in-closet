@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsString, MinLength } from 'class-validator';
 
-export class LogInRequestBodyDto {
+export class CreateCredentialGroupRequestBodyDto {
   @ApiProperty({
     example: 'user@example.com',
   })
