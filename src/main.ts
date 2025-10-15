@@ -7,6 +7,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const environmentConfigService = app.get(EnvironmentConfigService);
 
+  app.enableCors({
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: '*',
+    exposedHeaders: '*',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('Pass In Closet')
     .setDescription('Keep Your Pass In Closet')
