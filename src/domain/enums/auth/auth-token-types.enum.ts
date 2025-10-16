@@ -1,3 +1,3 @@
 export enum AuthTokenTypeEnum {
-  LOGIN = 'login',
+  ACCESS_TOKEN = 'access-token',
 }

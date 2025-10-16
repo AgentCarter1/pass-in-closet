@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { SignUpRequestDto } from 'src/application/dto/auth/request/sign-up.request.body.dto';
 import { SignUpResponseDto } from 'src/application/dto/auth/response/sign-up.response.dto';
-import { CreateAccountCommandService } from 'src/application/services/account/command/create-account.command.service';
-import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/get-one-account-by-filter.service';
+import { CreateAccountCommandService } from 'src/application/services/account/command/account/create-account.command.service';
+import { GetOneAccountByFilterBaseQueryService } from 'src/application/services/account/query/account/get-one-account-by-filter.service';
 import { BcryptHashingService } from 'src/application/services/bcrypt/bcrypt-hashing.service';
 import { AccountModel } from 'src/domain/models/account.model';
 import { DataSource } from 'typeorm';

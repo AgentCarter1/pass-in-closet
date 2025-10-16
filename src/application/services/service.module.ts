@@ -2,11 +2,13 @@ import { Global, Module } from '@nestjs/common';
 import { AccountServiceModule } from './account/account.service.module';
 import { BcrypHashingServiceModule } from './bcrypt/bcrypt-hashing.service.module';
 import { TokenServiceModule } from './token/token.service.module';
+import { CredentialGroupServiceModule } from './cretential-group/credential-group.service.module';
 
 const modules = [
   BcrypHashingServiceModule,
   TokenServiceModule,
   AccountServiceModule,
+  CredentialGroupServiceModule,
 ];
 
 @Global()

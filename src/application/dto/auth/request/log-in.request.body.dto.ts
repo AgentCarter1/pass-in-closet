@@ -9,7 +9,7 @@ export class LogInRequestBodyDto {
   email: string;
 
   @ApiProperty({
-    example: 'strongpassword123',
+    example: 'StrongPass123!',
     minLength: 6,
   })
   @IsString()

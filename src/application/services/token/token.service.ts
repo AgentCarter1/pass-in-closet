@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 import { EnvironmentConfigService } from 'src/application/environment-config/environment-config.service';
 
@@ -6,6 +7,7 @@ import { EnvironmentConfigService } from 'src/application/environment-config/env
 export class TokenService {
   public constructor(
     private readonly environmentConfigService: EnvironmentConfigService,
+    private readonly jwtService: JwtService,
   ) {}
 
   public createAccessToken(payload: Record<string, any>): string {
@@ -22,6 +24,17 @@ export class TokenService {
       this.environmentConfigService.tokeneEnvironmentConfigService.getRefreshTokenSecret() as string,
       this.environmentConfigService.tokeneEnvironmentConfigService.getRefreshTokenExpiresIn() as string,
     );
+  }
+
+  public verifyAccessToken<T = any>(token: string): T {
+    try {
+      return this.jwtService.verify(token, {
+        secret:
+          this.environmentConfigService.tokeneEnvironmentConfigService.getAccessTokenSecret(),
+      }) as T;
+    } catch (error) {
+      throw new Error('INVALID TOKEN');
+    }
   }
 
   public _createToken(
