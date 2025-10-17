@@ -4,6 +4,9 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { AccountHasCredentialGroups } from './AccountHasCredentialGroups';
 import { Credentials } from './Credentials';
@@ -17,27 +20,28 @@ export class CredentialGroups {
   @Column('character varying', { name: 'name', nullable: true, length: 255 })
   name: string | null;
 
-  @Column('timestamp without time zone', {
+  @CreateDateColumn({
     name: 'created_at',
-    nullable: true,
+    type: 'timestamp without time zone',
     default: () => 'now()',
   })
   createdAt: Date | null;
 
-  @Column('timestamp without time zone', {
+  @UpdateDateColumn({
     name: 'updated_at',
-    nullable: true,
+    type: 'timestamp without time zone',
     default: () => 'now()',
   })
   updatedAt: Date | null;
 
-  @Column('timestamp without time zone', { name: 'deleted_at', nullable: true })
+  @DeleteDateColumn({
+    name: 'deleted_at',
+    type: 'timestamp without time zone',
+    nullable: true,
+  })
   deletedAt: Date | null;
 
-  @OneToMany(
-    () => AccountHasCredentialGroups,
-    (accountHasCredentialGroups) => accountHasCredentialGroups.credentialGroup,
-  )
+  @OneToMany(() => AccountHasCredentialGroups, (ahcg) => ahcg.credentialGroup)
   accountHasCredentialGroups: AccountHasCredentialGroups[];
 
   @OneToMany(
