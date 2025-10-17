@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCredentialGroupResponseDto {
+export class UpdateCredentialGroupResponseDto {
   @ApiProperty({
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
   public readonly id: string;
 
   @ApiProperty({
-    example: 'My Credential Group',
+    example: 'Updated Group Name',
   })
   public readonly name: string;
 
@@ -21,7 +21,7 @@ export class CreateCredentialGroupResponseDto {
   })
   public readonly updatedAt: Date;
 
-  public constructor(props: Partial<CreateCredentialGroupResponseDto> = {}) {
+  public constructor(props: Partial<UpdateCredentialGroupResponseDto> = {}) {
     this.id = props.id!;
     this.name = props.name!;
     this.createdAt = props.createdAt!;

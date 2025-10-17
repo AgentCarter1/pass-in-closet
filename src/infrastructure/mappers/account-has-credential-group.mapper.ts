@@ -23,10 +23,10 @@ export class AccountHasCredentialGroupMapper
       entity.id = domain.id;
     }
 
-    ((entity.accountId = domain.accountId),
-      (entity.credentialGroupId = domain.credentialGroupId),
-      (entity.createdAt = domain.createdAt));
-    entity.updatedAt = domain.updatedAt;
+    entity.accountId = domain.accountId;
+    entity.credentialGroupId = domain.credentialGroupId;
+    entity.createdAt = domain.createdAt ?? null;
+    entity.updatedAt = domain.updatedAt ?? null;
 
     return entity;
   }
