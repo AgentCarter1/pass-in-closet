@@ -52,7 +52,10 @@ export class CreateCredentialGroupCommandUseCase {
       await queryRunner.commitTransaction();
 
       return new CreateCredentialGroupResponseDto({
-        ...createdCredentialGroupModel,
+        id: createdCredentialGroupModel.id!,
+        name: createdCredentialGroupModel.name!,
+        createdAt: createdCredentialGroupModel.createdAt!,
+        updatedAt: createdCredentialGroupModel.updatedAt!,
       });
     } catch (error) {
       try {

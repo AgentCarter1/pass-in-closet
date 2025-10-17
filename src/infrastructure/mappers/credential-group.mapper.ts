@@ -22,8 +22,10 @@ export class CredentialGroupMapper
       entity.id = domain.id;
     }
 
-    ((entity.name = domain.name), (entity.createdAt = domain.createdAt));
-    entity.updatedAt = domain.updatedAt;
+    entity.name = domain.name;
+    entity.createdAt = domain.createdAt ?? null;
+    entity.updatedAt = domain.updatedAt ?? null;
+    entity.deletedAt = domain.deletedAt ?? null;
 
     return entity;
   }

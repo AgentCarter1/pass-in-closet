@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as jwt from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 import { EnvironmentConfigService } from 'src/application/environment-config/environment-config.service';
 
 @Injectable()
@@ -42,9 +42,9 @@ export class TokenService {
     secret: string,
     expiresIn: string,
   ): string {
-    const refreshToken: string = jwt.sign(payload, secret, {
-      expiresIn,
-    });
-    return refreshToken;
+    const token: string = sign(payload, secret, {
+      expiresIn: expiresIn,
+    } as any);
+    return token;
   }
 }
